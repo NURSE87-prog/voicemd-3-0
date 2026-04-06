@@ -57,90 +57,143 @@ export function Sidebar() {
   };
 
   return (
-    <div className="flex h-full w-64 flex-col" style={{ background: 'var(--bg-color)', borderRight: '1px solid var(--border-subtle)' }}>
-      <div className="flex h-16 shrink-0 items-center px-6">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div style={{ background: 'var(--accent-soft)', padding: '0.4rem', borderRadius: '10px', color: 'var(--accent)', transition: 'all 0.2s', boxShadow: 'var(--shadow-sm)' }}>
-            <Activity className="w-5 h-5" />
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%', background: 'var(--bg-card)', borderRight: '1px solid var(--border-subtle)', position: 'relative', zIndex: 100 }}>
+      {/* Logo Section */}
+      <div style={{ display: 'flex', height: '80px', alignItems: 'center', padding: '0 2rem', flexShrink: 0 }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
+          <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'var(--text-primary)', color: 'var(--bg-card)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Activity size={18} />
           </div>
-          <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--text-primary)', letterSpacing: '-0.02em', fontWeight: 600 }}>
+          <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
             VoiceMD
           </span>
         </Link>
       </div>
       
-      <div className="flex flex-1 flex-col overflow-y-auto px-4 py-6">
-        <div className="mb-8">
+      <div style={{ display: 'flex', flex: 1, flexDirection: 'column', overflowY: 'auto', padding: '1rem 1rem 0' }}>
+        {/* Primary Action: Start Recording */}
+        <div style={{ marginBottom: '2rem', padding: '0 0.5rem' }}>
           <Link 
             href="/dashboard/record"
-            className="premium-btn w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold transition-all shadow-md"
-            style={{ background: 'var(--text-primary)', color: 'var(--bg-color)', fontSize: '0.95rem' }}
+            style={{ 
+              display: 'flex', 
+              width: '100%', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              gap: '0.75rem', 
+              padding: '0.875rem', 
+              borderRadius: '12px', 
+              background: 'var(--text-primary)', 
+              color: 'var(--bg-card)', 
+              fontSize: '0.9rem', 
+              fontWeight: 700, 
+              boxShadow: 'var(--shadow-md)', 
+              textDecoration: 'none',
+              transition: 'transform 0.2s',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
-            <Mic className="w-4 h-4" /> Start Recording
+            <Mic size={18} /> 
+            Start Recording
           </Link>
         </div>
 
-        <nav className="flex-1 space-y-1.5">
-          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 1rem 0.5rem' }}>Menu</p>
-          {navigation.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all"
-                style={{ 
-                  background: isActive ? 'var(--bg-card)' : 'transparent',
-                  color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
-                  boxShadow: isActive ? 'var(--shadow-sm)' : 'none',
-                  border: isActive ? '1px solid var(--border-subtle)' : '1px solid transparent'
-                }}
-              >
-                <item.icon className="w-4 h-4 flex-shrink-0" style={{ color: isActive ? 'var(--accent)' : 'inherit', opacity: isActive ? 1 : 0.6 }} />
-                {item.name}
-              </Link>
-            );
-          })}
+        {/* Navigation Blocks */}
+        <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2rem', padding: '0 0.5rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <p style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 1rem 0.5rem' }}>Menu</p>
+            {navigation.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '0.75rem', 
+                    padding: '0.75rem 1rem', 
+                    borderRadius: '12px', 
+                    fontSize: '0.9rem', 
+                    fontWeight: 600, 
+                    color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
+                    background: isActive ? 'var(--accent-soft)' : 'transparent',
+                    textDecoration: 'none',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => { if(!isActive) e.currentTarget.style.background = 'var(--accent-soft)'; }}
+                  onMouseLeave={(e) => { if(!isActive) e.currentTarget.style.background = 'transparent'; }}
+                >
+                  <item.icon size={18} style={{ opacity: isActive ? 1 : 0.6 }} />
+                  {item.name}
+                </Link>
+              );
+            })}
+          </div>
           
           {isAdmin && (
-            <>
-              <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '1.5rem 0 1rem 0.5rem' }}>Administration</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <p style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--record-btn)', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '1rem 0 1rem 0.5rem' }}>Administration</p>
               <Link
                 href="/dashboard/admin"
-                className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all"
                 style={{ 
-                  background: pathname === '/dashboard/admin' ? 'var(--bg-card)' : 'transparent',
-                  color: pathname === '/dashboard/admin' ? 'var(--accent)' : 'var(--text-secondary)',
-                  boxShadow: pathname === '/dashboard/admin' ? 'var(--shadow-sm)' : 'none',
-                  border: pathname === '/dashboard/admin' ? '1px solid var(--border-subtle)' : '1px solid transparent'
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.75rem', 
+                  padding: '0.75rem 1rem', 
+                  borderRadius: '12px', 
+                  fontSize: '0.9rem', 
+                  fontWeight: 600, 
+                  color: pathname === '/dashboard/admin' ? 'var(--record-btn)' : 'var(--text-secondary)',
+                  background: pathname === '/dashboard/admin' ? 'rgba(196, 92, 74, 0.08)' : 'transparent',
+                  textDecoration: 'none',
+                  transition: 'all 0.2s'
                 }}
+                onMouseEnter={(e) => { if(pathname !== '/dashboard/admin') e.currentTarget.style.background = 'rgba(196, 92, 74, 0.04)'; }}
+                onMouseLeave={(e) => { if(pathname !== '/dashboard/admin') e.currentTarget.style.background = 'transparent'; }}
               >
-                <ShieldCheck className="w-4 h-4 flex-shrink-0" style={{ color: pathname === '/dashboard/admin' ? 'var(--accent)' : 'inherit', opacity: pathname === '/dashboard/admin' ? 1 : 0.6 }} />
+                <ShieldCheck size={18} style={{ opacity: pathname === '/dashboard/admin' ? 1 : 0.6 }} />
                 Admin & Users
               </Link>
-            </>
+            </div>
           )}
         </nav>
       </div>
       
-      <div className="p-4" style={{ paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)' }}>
-        <div className="flex items-center gap-3 px-3 py-2 mb-3">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm shadow-sm" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>
+      {/* Footer Area: User Profile & Logout */}
+      <div style={{ marginTop: 'auto', padding: '1.5rem', borderTop: '1px solid var(--border-subtle)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.5rem', marginBottom: '1rem' }}>
+          <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--accent-soft)', color: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.9rem', border: '1px solid var(--border-subtle)' }}>
             {userProfile.initials}
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold truncate" style={{ color: 'var(--text-primary)' }}>{userProfile.name}</p>
-            <p className="text-xs truncate" style={{ color: 'var(--text-muted)' }}>{userProfile.specialty}</p>
+          <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
+            <p style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{userProfile.name}</p>
+            <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{userProfile.specialty}</p>
           </div>
         </div>
+        
         <button
           onClick={handleSignOut}
-          className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all w-full text-left"
-          style={{ color: 'var(--text-secondary)' }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'; e.currentTarget.style.color = '#ef4444'; }}
+          style={{ 
+            display: 'flex', 
+            width: '100%', 
+            alignItems: 'center', 
+            gap: '0.75rem', 
+            padding: '0.75rem 1rem', 
+            borderRadius: '12px', 
+            fontSize: '0.85rem', 
+            fontWeight: 600, 
+            color: 'var(--text-secondary)', 
+            background: 'transparent', 
+            border: 'none', 
+            cursor: 'pointer',
+            transition: 'all 0.2s'
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(196, 92, 74, 0.08)'; e.currentTarget.style.color = 'var(--record-btn)'; }}
           onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
         >
-          <LogOut className="w-4 h-4 flex-shrink-0" />
+          <LogOut size={16} />
           Sign out
         </button>
       </div>

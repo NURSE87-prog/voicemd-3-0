@@ -6,15 +6,15 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-row h-screen w-full bg-white dark:bg-[#020617] overflow-hidden">
+    <div style={{ display: 'flex', flexDirection: 'row', height: '100vh', width: '100%', background: 'var(--bg-color)', overflow: 'hidden' }}>
       {/* Fixed sidebar area */}
-      <div className="w-64 flex-shrink-0 h-full border-r border-slate-100 dark:border-slate-800">
+      <aside style={{ width: '260px', minWidth: '260px', height: '100%', borderRight: '1px solid var(--border-subtle)', position: 'relative', zIndex: 50, background: 'var(--bg-card)' }}>
         <Sidebar aria-label="Main Navigation" />
-      </div>
+      </aside>
       
       {/* Scrollable main content area */}
-      <main className="flex-1 h-full overflow-y-auto bg-slate-50/30 dark:bg-[#020617] relative">
-        <div className="max-w-7xl mx-auto p-4 md:p-8">
+      <main className="flex-1 h-full overflow-y-auto bg-[#fbfaf9] dark:bg-[#0f0e0d] relative">
+        <div className="max-w-[1400px] mx-auto p-6 md:p-10">
           {children}
         </div>
       </main>
