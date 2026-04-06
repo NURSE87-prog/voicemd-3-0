@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Search, FileText, Filter, Calendar, CheckCircle, Clock } from "lucide-react";
+import { Search, FileText, Filter, Calendar, CheckCircle, Clock, ChevronRight, Stethoscope, ListFilter } from "lucide-react";
 
+// Keeping the dummy data but upgrading its presentation in the UI
 const initialNotes = [
   { id: 1, patient: "Arthur Shelby", type: "SOAP Note", chiefComplaint: "Chest pain", date: "2024-04-04", status: "Completed" },
-  { id: 2, patient: "Thomas Shelby", type: "Consultation", chiefComplaint: "Insomnia, stress", date: "2024-04-03", status: "Needs Review" },
+  { id: 2, patient: "Thomas Shelby", type: "Consultation", chiefComplaint: "Insomnia, stress", date: "2024-04-03", status: "Review Required" },
   { id: 3, patient: "Grace Burgess", type: "SOAP Note", chiefComplaint: "Routine checkup", date: "2024-04-02", status: "Completed" },
   { id: 4, patient: "Alfie Solomons", type: "Follow-up", chiefComplaint: "Post-surgery check", date: "2024-04-01", status: "Completed" },
   { id: 5, patient: "Michael Chen", type: "SOAP Note", chiefComplaint: "Hypertension follow-up", date: "2024-03-30", status: "Completed" },
   { id: 6, patient: "Sarah Jenkins", type: "Annual Physical", chiefComplaint: "General wellness", date: "2024-03-29", status: "Completed" },
-  { id: 7, patient: "Emily Rodriguez", type: "Consultation", chiefComplaint: "Migraine management", date: "2024-03-28", status: "Needs Review" },
+  { id: 7, patient: "Emily Rodriguez", type: "Consultation", chiefComplaint: "Migraine management", date: "2024-03-28", status: "Review Required" },
 ];
 
 export default function NotesPage() {
@@ -22,81 +23,116 @@ export default function NotesPage() {
   );
 
   return (
-    <div className="p-8 max-w-6xl mx-auto w-full animate-fade-in">
-      <header className="mb-10">
-        <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mb-2">Medical Notes</h1>
-        <p className="text-zinc-500 dark:text-zinc-400">View and manage all generated clinical documentation.</p>
+    <div className="mx-auto max-w-6xl px-4 py-8 animate-in fade-in duration-700">
+      
+      {/* Premium Header */}
+      <header className="mb-12 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+        <div>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.5rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>Platform Notes</h1>
+          <p style={{ marginTop: '0.5rem', color: 'var(--text-secondary)' }}>View and manage all generated clinical documentation across the SaaS.</p>
+        </div>
+        
+        {/* Total Count Badge */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderRadius: '999px', background: 'var(--accent-soft)', padding: '0.5rem 1rem', border: '1px solid var(--border-subtle)' }}>
+           <FileText size={16} color="var(--accent)" />
+           <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-primary)' }}>{initialNotes.length} Total Records</span>
+        </div>
       </header>
 
-      <div className="flex flex-col md:flex-row gap-4 mb-8">
-        <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+      {/* Advanced Search & Filters */}
+      <div className="flex flex-col md:flex-row gap-4 mb-12">
+        <div className="relative flex-1 group">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: 'var(--text-muted)' }} />
           <input
             type="text"
-            placeholder="Search notes by patient or complaint..."
+            placeholder="Search notes by patient identifier or complaint..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            style={{ width: '100%', borderRadius: '16px', border: '1px solid var(--border-subtle)', background: 'var(--bg-card)', padding: '0.875rem 1rem 0.875rem 3rem', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', outline: 'none', boxShadow: 'var(--shadow-sm)' }}
           />
         </div>
-        <div className="flex gap-2">
-          <button className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+        <div className="flex gap-3">
+          <button style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', borderRadius: '16px', border: '1px solid var(--border-subtle)', background: 'var(--bg-card)', padding: '0.875rem 1.25rem', fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-secondary)', cursor: 'pointer', boxShadow: 'var(--shadow-sm)' }}>
             <Calendar className="w-4 h-4" /> Date Range
           </button>
-          <button className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
-            <Filter className="w-4 h-4" /> All Types
+          <button style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', borderRadius: '16px', border: '1px solid var(--border-subtle)', background: 'var(--bg-card)', padding: '0.875rem 1.25rem', fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-secondary)', cursor: 'pointer', boxShadow: 'var(--shadow-sm)' }}>
+            <ListFilter className="w-4 h-4" /> Filter Types
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Note Cards Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2rem' }}>
         {filteredNotes.map((note) => (
-          <div key={note.id} className="glass dark:glass-dark rounded-2xl p-6 shadow-sm shadow-zinc-900/5 dark:shadow-black/20 hover:border-blue-500/50 transition-colors cursor-pointer group">
-            <div className="flex items-start justify-between mb-4">
-              <div className="bg-blue-100 dark:bg-blue-900/30 p-2.5 rounded-xl text-blue-600 dark:text-blue-400 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors">
-                <FileText className="w-6 h-6" />
-              </div>
-              <span className={`flex items-center text-xs font-semibold px-2 py-1 rounded-full ${
-                note.status === 'Completed' 
-                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                  : 'bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400'
-              }`}>
-                {note.status === 'Completed' ? <CheckCircle className="w-3 h-3 mr-1" /> : <Clock className="w-3 h-3 mr-1" />}
-                {note.status}
-              </span>
+          <div key={note.id} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRadius: '32px', background: 'var(--bg-card)', padding: '2rem', boxShadow: 'var(--shadow-xl)', border: '1px solid var(--border-subtle)', transition: 'transform 0.2s', cursor: 'default' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-4px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+            
+            <div>
+               {/* Card Header & Status */}
+               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+                 <div style={{ display: 'flex', height: '48px', width: '48px', alignItems: 'center', justifyContent: 'center', borderRadius: '16px', background: 'var(--accent-soft)', color: 'var(--accent)' }}>
+                   <Stethoscope className="w-6 h-6" />
+                 </div>
+                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.375rem', borderRadius: '999px', padding: '0.25rem 0.75rem', fontSize: '0.625rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', background: note.status === 'Completed' ? 'rgba(5, 150, 105, 0.1)' : 'rgba(217, 119, 6, 0.1)', color: note.status === 'Completed' ? '#059669' : '#d97706' }}>
+                   {note.status === 'Completed' ? <CheckCircle className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
+                   {note.status}
+                 </span>
+               </div>
+               
+               {/* Content */}
+               <div style={{ marginBottom: '0.5rem' }}>
+                 <p style={{ fontSize: '0.625rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>Target Patient</p>
+                 <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>{note.patient}</h3>
+               </div>
+               
+               <p style={{ display: 'inline-block', marginBottom: '1.5rem', borderRadius: '8px', background: 'var(--accent-soft)', padding: '0.25rem 0.625rem', fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)' }}>
+                 {note.type}
+               </p>
+               
+               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ display: 'flex', height: '32px', width: '32px', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', background: 'var(--bg-color)' }}>
+                       <FileText className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+                    </div>
+                    <div>
+                       <p style={{ fontSize: '0.625rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>Context</p>
+                       <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{note.chiefComplaint}</p>
+                    </div>
+                 </div>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ display: 'flex', height: '32px', width: '32px', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', background: 'var(--bg-color)' }}>
+                       <Calendar className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+                    </div>
+                    <div>
+                       <p style={{ fontSize: '0.625rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>Date Logged</p>
+                       <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{note.date}</p>
+                    </div>
+                 </div>
+               </div>
             </div>
             
-            <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-1">{note.patient}</h3>
-            <p className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-4">{note.type}</p>
-            
-            <div className="space-y-2 mb-6">
-              <p className="text-sm text-zinc-500 dark:text-zinc-400 flex items-center">
-                <span className="w-4 h-4 mr-2 text-zinc-400"><FileText className="w-full h-full" /></span>
-                {note.chiefComplaint}
-              </p>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400 flex items-center">
-                <span className="w-4 h-4 mr-2 text-zinc-400"><Calendar className="w-full h-full" /></span>
-                {note.date}
-              </p>
-            </div>
-            
-            <div className="flex gap-2">
-              <button className="flex-1 py-2 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-lg text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
-                View Note
+            {/* Action Buttons */}
+            <div style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-subtle)', paddingTop: '1.5rem' }}>
+              <button style={{ background: 'none', border: 'none', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', cursor: 'pointer' }}>
+                Export Data
               </button>
-              <button className="px-4 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
-                Export
+              <button style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', borderRadius: '12px', background: 'var(--text-primary)', color: 'var(--bg-card)', padding: '0.625rem 1.25rem', fontSize: '0.75rem', fontWeight: 700, border: 'none', cursor: 'pointer', transition: 'transform 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                Inspect <ChevronRight className="w-3 h-3" />
               </button>
             </div>
           </div>
         ))}
       </div>
 
+      {/* Empty State */}
       {filteredNotes.length === 0 && (
-        <div className="py-32 text-center">
-          <FileText className="w-16 h-16 text-zinc-200 dark:text-zinc-800 mx-auto mb-4" />
-          <h3 className="text-zinc-900 dark:text-white font-medium text-xl">No notes found</h3>
-          <p className="text-zinc-500 dark:text-zinc-400 mt-2">No records match your search criteria.</p>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRadius: '40px', border: '1px dashed var(--border-subtle)', padding: '8rem 2rem', textAlign: 'center', marginTop: '2rem' }}>
+          <div style={{ marginBottom: '1.5rem', display: 'flex', height: '80px', width: '80px', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', background: 'var(--accent-soft)', color: 'var(--text-muted)' }}>
+            <Search className="w-8 h-8" />
+          </div>
+          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>No records found</h3>
+          <p style={{ marginTop: '0.5rem', color: 'var(--text-secondary)', maxWidth: '24rem' }}>
+            We couldn't find any platform notes matching your current filter criteria.
+          </p>
         </div>
       )}
     </div>
