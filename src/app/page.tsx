@@ -142,33 +142,28 @@ export default function VoiceMD() {
 
   return (
     <>
-      <header className="flex flex-col md:flex-row items-center justify-between p-6 max-w-6xl mx-auto w-full">
-        <div className="flex items-center gap-2">
-          <div className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            VoiceMD
-          </div>
+      <header className="header">
+        <div className="logo-container">
+          <div className="logo">VoiceMD</div>
         </div>
-        <div className="flex items-center gap-4 mt-4 md:mt-0">
-          <div className="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-full">
-            <button className={`px-4 py-1.5 rounded-full text-xs transition-all ${lang === "EN" ? "bg-white dark:bg-black font-semibold text-gray-900 dark:text-white shadow-sm" : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"}`} onClick={() => setLang("EN")}>
-              EN
-            </button>
-            <button className={`px-4 py-1.5 rounded-full text-xs transition-all ${lang === "FR" ? "bg-white dark:bg-black font-semibold text-gray-900 dark:text-white shadow-sm" : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"}`} onClick={() => setLang("FR")}>
-              FR
-            </button>
-          </div>
-          <Link href="/signup" className="text-sm font-medium text-white bg-gray-900 dark:bg-white dark:text-black px-5 py-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">
+        <div className="lang-selector">
+          <button className={`lang-btn ${lang === "EN" ? "active" : ""}`} onClick={() => setLang("EN")}>
+            EN
+          </button>
+          <button className={`lang-btn ${lang === "FR" ? "active" : ""}`} onClick={() => setLang("FR")}>
+            FR
+          </button>
+          <div style={{ width: '10px' }}></div>
+          <Link href="/signup" className="lang-btn" style={{ background: 'var(--text-primary)', color: 'var(--bg-color)', fontWeight: 700 }}>
             Try Free
           </Link>
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 py-16 md:py-24 text-center">
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white mb-6">
-            Effortless clinical documentation.
-          </h1>
-          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
+      <main className="main">
+        <div className="hero-section">
+          <h1 className="hero-title">Effortless clinical <span className="text-highlight">documentation</span></h1>
+          <p className="hero-subtitle">
             Designed for healthcare professionals. Record your consultation and instantly generate perfectly structured clinical notes with zero typing.
           </p>
         </div>
@@ -234,10 +229,10 @@ export default function VoiceMD() {
             <table className="note-table">
               <tbody>
                 {[
-                  { label: "Chief Complaint", val: note.chiefComplaint },
-                  { label: "History", val: note.history },
-                  { label: "Assessment", val: note.assessment },
-                  { label: "Plan", val: note.plan },
+                  { label: "Chief Complaint", val: note?.chiefComplaint || "" },
+                  { label: "History", val: note?.history || "" },
+                  { label: "Assessment", val: note?.assessment || "" },
+                  { label: "Plan", val: note?.plan || "" },
                 ].map(({ label, val }) => (
                   <tr key={label} className="note-row">
                     <td className="note-label">{label}</td>
