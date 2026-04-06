@@ -9,7 +9,8 @@ import {
   FileText, 
   Settings, 
   LogOut,
-  Mic
+  Mic,
+  ShieldCheck
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
@@ -26,11 +27,15 @@ export function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [userProfile, setUserProfile] = useState({ name: "Doctor", specialty: "Medical Scribe", initials: "DR" });
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
+        if (user.email === "lhaj.7.10.2020@gmail.com") {
+          setIsAdmin(true);
+        }
         const firstName = user.user_metadata?.first_name || "";
         const lastName = user.user_metadata?.last_name || "";
         const specialty = user.user_metadata?.specialty || "Physician";
@@ -96,6 +101,25 @@ export function Sidebar() {
               </Link>
             );
           })}
+          
+          {isAdmin && (
+            <>
+              <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '1.5rem 0 1rem 0.5rem' }}>Administration</p>
+              <Link
+                href="/dashboard/admin"
+                className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all"
+                style={{ 
+                  background: pathname === '/dashboard/admin' ? 'var(--bg-card)' : 'transparent',
+                  color: pathname === '/dashboard/admin' ? 'var(--accent)' : 'var(--text-secondary)',
+                  boxShadow: pathname === '/dashboard/admin' ? 'var(--shadow-sm)' : 'none',
+                  border: pathname === '/dashboard/admin' ? '1px solid var(--border-subtle)' : '1px solid transparent'
+                }}
+              >
+                <ShieldCheck className="w-4 h-4 flex-shrink-0" style={{ color: pathname === '/dashboard/admin' ? 'var(--accent)' : 'inherit', opacity: pathname === '/dashboard/admin' ? 1 : 0.6 }} />
+                Admin & Users
+              </Link>
+            </>
+          )}
         </nav>
       </div>
       
