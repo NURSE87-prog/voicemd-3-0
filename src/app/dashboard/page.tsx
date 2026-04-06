@@ -36,123 +36,118 @@ export default function DashboardOverview() {
   }, []);
 
   return (
-    <div className="p-8 max-w-6xl mx-auto w-full animate-fade-in relative">
-      {/* Background glow for the dashboard */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
-
-      <header className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 relative z-10">
+    <div style={{ padding: '2rem', maxWidth: '1152px', margin: '0 auto', width: '100%', animation: 'fadeIn 0.5s ease', position: 'relative' }}>
+      
+      <header style={{ marginBottom: '2.5rem', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1.5rem', position: 'relative', zIndex: 10 }}>
         <div>
-          <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mb-2 font-outfit">Good morning, {userName}</h1>
-          <p className="text-zinc-500 dark:text-zinc-400">Here's an overview of your schedule and recent notes.</p>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.6rem', color: 'var(--text-primary)', marginBottom: '0.4rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+            Good morning, {userName}.
+          </h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>Here's an overview of your schedule and recent clinical notes.</p>
         </div>
         <Link 
           href="/dashboard/patients"
-          className="flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-full font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all active:scale-95 shadow-lg shadow-zinc-900/20 dark:shadow-white/10"
+          className="premium-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all shadow-sm"
+          style={{ background: 'var(--bg-card)', color: 'var(--text-primary)', border: '1px solid var(--border-subtle)', fontSize: '0.95rem' }}
         >
-          <Plus className="w-5 h-5" /> New Patient
+          <Plus size={18} /> New Patient
         </Link>
       </header>
 
       {/* Hero Quick Action */}
-      <div className="mb-10 relative z-10 group">
+      <div style={{ marginBottom: '2.5rem', position: 'relative', zIndex: 10 }}>
         <Link 
           href="/dashboard/record"
-          className="relative overflow-hidden flex flex-col md:flex-row items-center gap-6 p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl shadow-blue-500/25 hover:shadow-blue-500/40 transition-all hover:-translate-y-1 active:scale-[0.98]"
+          style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1.5rem', padding: '2rem 2.5rem', borderRadius: '24px', background: 'var(--text-primary)', color: 'var(--bg-color)', boxShadow: 'var(--shadow-xl)', position: 'relative', overflow: 'hidden', transition: 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)' }}
+          className="hover:scale-[1.01] active:scale-[0.99] group"
         >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl pointer-events-none" />
-          <div className="bg-white/20 p-4 rounded-2xl backdrop-blur-md">
-            <Mic className="w-10 h-10" />
+          <div style={{ background: 'rgba(255, 255, 255, 0.1)', padding: '1.25rem', borderRadius: '20px', backdropFilter: 'blur(10px)' }}>
+            <Mic size={36} color="var(--bg-color)" />
           </div>
-          <div className="text-center md:text-left">
-            <h2 className="text-2xl font-bold mb-1">Start New AI Recording</h2>
-            <p className="text-blue-100 text-sm md:text-base opacity-90 max-w-md">
-              Tap here to start the ambient AI scribe for your next patient visit. Accurate notes in seconds.
+          <div style={{ flex: 1, minWidth: '280px' }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', marginBottom: '0.25rem', color: 'var(--bg-color)' }}>Start New Dictation</h2>
+            <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.95rem', maxWidth: '400px', lineHeight: 1.5 }}>
+              Tap here to launch the ambient AI scribe for your next patient visit. Generates structured SOAP notes instantly.
             </p>
           </div>
-          <div className="mt-4 md:mt-0 md:ml-auto bg-white text-blue-600 px-6 py-2.5 rounded-full font-bold shadow-lg">
+          <div style={{ background: 'var(--bg-color)', color: 'var(--text-primary)', padding: '0.875rem 1.75rem', borderRadius: '999px', fontWeight: 700, fontSize: '0.95rem', boxShadow: 'var(--shadow-sm)' }}>
             Start Scribing
           </div>
         </Link>
       </div>
 
       {/* Stats overview */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 relative z-10">
-        <div className="glass dark:glass-dark rounded-2xl p-6 shadow-sm shadow-zinc-900/5 dark:shadow-black/20">
-          <div className="flex justify-between items-start mb-4">
-            <div className="bg-blue-100 dark:bg-blue-900/30 p-2.5 rounded-xl text-blue-600 dark:text-blue-400">
-              <Users className="w-6 h-6" />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '3rem', position: 'relative', zIndex: 10 }}>
+        <div style={{ background: 'var(--bg-card)', borderRadius: '24px', padding: '1.75rem', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border-subtle)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+            <div style={{ background: 'rgba(56, 189, 248, 0.1)', padding: '0.6rem', borderRadius: '12px', color: '#0284c7' }}>
+              <Users size={22} />
             </div>
-            <span className="flex items-center text-sm font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-md">
-              <TrendingUp className="w-3 h-3 mr-1" /> +12%
+            <span style={{ display: 'flex', alignItems: 'center', fontSize: '0.75rem', fontWeight: 700, color: '#059669', background: 'rgba(16, 185, 129, 0.1)', padding: '0.25rem 0.5rem', borderRadius: '6px' }}>
+              <TrendingUp size={12} style={{ marginRight: '0.25rem' }} /> +12%
             </span>
           </div>
-          <h3 className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">124</h3>
-          <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Total Patients</p>
+          <h3 style={{ fontSize: '2.25rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.25rem', lineHeight: 1 }}>124</h3>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Patients</p>
         </div>
 
-        <div className="glass dark:glass-dark rounded-2xl p-6 shadow-sm shadow-zinc-900/5 dark:shadow-black/20">
-          <div className="flex justify-between items-start mb-4">
-            <div className="bg-indigo-100 dark:bg-indigo-900/30 p-2.5 rounded-xl text-indigo-600 dark:text-indigo-400">
-              <FileText className="w-6 h-6" />
+        <div style={{ background: 'var(--bg-card)', borderRadius: '24px', padding: '1.75rem', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border-subtle)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+            <div style={{ background: 'var(--accent-soft)', padding: '0.6rem', borderRadius: '12px', color: 'var(--accent)' }}>
+              <FileText size={22} />
             </div>
           </div>
-          <h3 className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">42</h3>
-          <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Notes this week</p>
+          <h3 style={{ fontSize: '2.25rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.25rem', lineHeight: 1 }}>42</h3>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Notes this week</p>
         </div>
 
-        <div className="glass dark:glass-dark rounded-2xl p-6 shadow-sm shadow-zinc-900/5 dark:shadow-black/20">
-          <div className="flex justify-between items-start mb-4">
-            <div className="bg-purple-100 dark:bg-purple-900/30 p-2.5 rounded-xl text-purple-600 dark:text-purple-400">
-              <Clock className="w-6 h-6" />
+        <div style={{ background: 'var(--bg-card)', borderRadius: '24px', padding: '1.75rem', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border-subtle)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+            <div style={{ background: 'rgba(168, 85, 247, 0.1)', padding: '0.6rem', borderRadius: '12px', color: '#9333ea' }}>
+              <Clock size={22} />
             </div>
-            <span className="flex items-center text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-md">
+            <span style={{ display: 'flex', alignItems: 'center', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-primary)', background: 'var(--border-subtle)', padding: '0.25rem 0.5rem', borderRadius: '6px' }}>
               -4 hours
             </span>
           </div>
-          <h3 className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">11.5h</h3>
-          <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Time saved charting</p>
+          <h3 style={{ fontSize: '2.25rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.25rem', lineHeight: 1 }}>11.5h</h3>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Time saved charting</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', position: 'relative', zIndex: 10 }}>
         {/* Recent Notes */}
-        <div className="lg:col-span-2">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-zinc-900 dark:text-white">Recent Notes</h2>
-            <button className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 flex items-center">
-              View all <ChevronRight className="w-4 h-4 ml-1" />
+        <div style={{ gridColumn: 'span 2' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--text-primary)' }}>Recent Notes</h2>
+            <button style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--accent)', background: 'transparent', border: 'none', display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+              View all <ChevronRight size={16} />
             </button>
           </div>
           
-          <div className="glass dark:glass-dark rounded-2xl overflow-hidden shadow-sm shadow-zinc-900/5 dark:shadow-black/20">
-            <ul className="divide-y divide-zinc-200/50 dark:divide-zinc-800/50">
-              {recentNotes.map((note) => (
-                <li key={note.id} className="p-4 sm:px-6 hover:bg-zinc-50/50 dark:hover:bg-zinc-900/50 transition-colors cursor-pointer group">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center min-w-0 gap-4">
-                      <div className="hidden sm:flex h-12 w-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 items-center justify-center flex-shrink-0 text-blue-600 dark:text-blue-400 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/40 transition-colors">
-                        <FileText className="w-6 h-6" />
+          <div style={{ background: 'var(--bg-card)', borderRadius: '24px', overflow: 'hidden', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border-subtle)' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {recentNotes.map((note, index) => (
+                <li key={note.id} style={{ padding: '1.25rem 1.5rem', borderBottom: index !== recentNotes.length - 1 ? '1px solid var(--border-subtle)' : 'none', transition: 'background 0.2s', cursor: 'pointer' }} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/50">
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', minWidth: 0 }}>
+                      <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'var(--bg-color)', border: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>
+                        <FileText size={20} />
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm font-semibold text-zinc-900 dark:text-white truncate">
-                          {note.patientName} <span className="font-normal text-zinc-500 dark:text-zinc-400">({note.type})</span>
+                      <div style={{ minWidth: 0 }}>
+                        <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {note.patientName} <span style={{ fontWeight: 400, color: 'var(--text-muted)' }}>({note.type})</span>
                         </p>
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 flex items-center gap-2 mt-1">
-                          <Stethoscope className="w-3.5 h-3.5" /> {note.chiefComplaint}
+                        <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '0.2rem' }}>
+                          <Stethoscope size={14} /> {note.chiefComplaint}
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end flex-shrink-0 ml-4">
-                      <p className="text-sm text-zinc-900 dark:text-white whitespace-nowrap">{note.date}</p>
-                      <p className="flex items-center text-xs mt-1">
-                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full font-medium ${
-                          note.status === 'Completed' 
-                            ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                            : 'bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400'
-                        }`}>
-                          {note.status}
-                        </span>
-                      </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', flexShrink: 0, marginLeft: '1rem' }}>
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{note.date}</p>
+                      <span style={{ marginTop: '0.4rem', display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600, background: note.status === 'Completed' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)', color: note.status === 'Completed' ? '#059669' : '#d97706' }}>
+                        {note.status}
+                      </span>
                     </div>
                   </div>
                 </li>
@@ -163,29 +158,29 @@ export default function DashboardOverview() {
 
         {/* Quick Actions / Today */}
         <div>
-          <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-6">Today's Schedule</h2>
-          <div className="glass dark:glass-dark rounded-2xl p-6 shadow-sm shadow-zinc-900/5 dark:shadow-black/20">
-            <div className="space-y-6">
-              <div className="relative pl-6 border-l-2 border-blue-500">
-                <div className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-white dark:ring-zinc-950" />
-                <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-1">09:00 AM</p>
-                <p className="text-sm font-medium text-zinc-900 dark:text-white">Sarah Jenkins</p>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">Annual Physical</p>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1.25rem' }}>Today's Schedule</h2>
+          <div style={{ background: 'var(--bg-card)', borderRadius: '24px', padding: '1.75rem', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ position: 'relative', paddingLeft: '1.25rem', borderLeft: '2px solid var(--text-primary)' }}>
+                <div style={{ position: 'absolute', left: '-5px', top: '5px', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--text-primary)', boxShadow: '0 0 0 4px var(--bg-card)' }} />
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.2rem' }}>09:00 AM</p>
+                <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)' }}>Sarah Jenkins</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Annual Physical</p>
               </div>
-              <div className="relative pl-6 border-l-2 border-zinc-200 dark:border-zinc-800">
-                <div className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-700 ring-4 ring-white dark:ring-zinc-950" />
-                <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 mb-1">10:30 AM</p>
-                <p className="text-sm font-medium text-zinc-900 dark:text-white">Michael Chen</p>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">Hypertension follow-up</p>
+              <div style={{ position: 'relative', paddingLeft: '1.25rem', borderLeft: '2px solid var(--border-subtle)' }}>
+                <div style={{ position: 'absolute', left: '-5px', top: '5px', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--text-muted)', boxShadow: '0 0 0 4px var(--bg-card)' }} />
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.2rem' }}>10:30 AM</p>
+                <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)' }}>Michael Chen</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Hypertension follow-up</p>
               </div>
-              <div className="relative pl-6 border-l-2 border-zinc-200 dark:border-zinc-800 border-transparent">
-                <div className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-700 ring-4 ring-white dark:ring-zinc-950" />
-                <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 mb-1">11:15 AM</p>
-                <p className="text-sm font-medium text-zinc-900 dark:text-white">Emily Rodriguez</p>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">Migraine consultation</p>
+              <div style={{ position: 'relative', paddingLeft: '1.25rem', borderLeft: '2px solid transparent' }}>
+                <div style={{ position: 'absolute', left: '-5px', top: '5px', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--text-muted)', boxShadow: '0 0 0 4px var(--bg-card)' }} />
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.2rem' }}>11:15 AM</p>
+                <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)' }}>Emily Rodriguez</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Migraine consultation</p>
               </div>
               
-              <button className="w-full mt-4 py-2 border border-zinc-200 dark:border-zinc-800 rounded-xl text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
+              <button style={{ width: '100%', marginTop: '0.5rem', padding: '0.875rem', borderRadius: '12px', border: '1px solid var(--border-subtle)', background: 'var(--bg-color)', color: 'var(--text-primary)', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', transition: 'background 0.2s' }} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/50">
                 View Full Calendar
               </button>
             </div>

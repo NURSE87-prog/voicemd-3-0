@@ -52,44 +52,46 @@ export function Sidebar() {
   };
 
   return (
-    <div className="flex h-full w-64 flex-col bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800">
+    <div className="flex h-full w-64 flex-col" style={{ background: 'var(--bg-color)', borderRight: '1px solid var(--border-subtle)' }}>
       <div className="flex h-16 shrink-0 items-center px-6">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="bg-blue-600 p-1.5 rounded-xl text-white group-hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/20">
+          <div style={{ background: 'var(--accent-soft)', padding: '0.4rem', borderRadius: '10px', color: 'var(--accent)', transition: 'all 0.2s', boxShadow: 'var(--shadow-sm)' }}>
             <Activity className="w-5 h-5" />
           </div>
-          <span className="font-outfit font-black text-xl tracking-tighter text-zinc-900 dark:text-white">
+          <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--text-primary)', letterSpacing: '-0.02em', fontWeight: 600 }}>
             VoiceMD
           </span>
         </Link>
       </div>
       
-      <div className="flex flex-1 flex-col overflow-y-auto px-4 py-4">
+      <div className="flex flex-1 flex-col overflow-y-auto px-4 py-6">
         <div className="mb-8">
           <Link 
             href="/dashboard/record"
-            className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-3 rounded-xl font-medium transition-colors shadow-sm shadow-blue-600/20"
+            className="premium-btn w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold transition-all shadow-md"
+            style={{ background: 'var(--text-primary)', color: 'var(--bg-color)', fontSize: '0.95rem' }}
           >
-            <Mic className="w-5 h-5" /> Start Recording
+            <Mic className="w-4 h-4" /> Start Recording
           </Link>
         </div>
 
-        <nav className="flex-1 space-y-1">
+        <nav className="flex-1 space-y-1.5">
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 1rem 0.5rem' }}>Menu</p>
           {navigation.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`
-                  group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all
-                  ${isActive 
-                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' 
-                    : 'text-zinc-700 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-100'
-                  }
-                `}
+                className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all"
+                style={{ 
+                  background: isActive ? 'var(--bg-card)' : 'transparent',
+                  color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
+                  boxShadow: isActive ? 'var(--shadow-sm)' : 'none',
+                  border: isActive ? '1px solid var(--border-subtle)' : '1px solid transparent'
+                }}
               >
-                <item.icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-blue-600 dark:text-blue-400' : 'text-zinc-400 group-hover:text-zinc-500 dark:group-hover:text-zinc-300'}`} />
+                <item.icon className="w-4 h-4 flex-shrink-0" style={{ color: isActive ? 'var(--accent)' : 'inherit', opacity: isActive ? 1 : 0.6 }} />
                 {item.name}
               </Link>
             );
@@ -97,21 +99,24 @@ export function Sidebar() {
         </nav>
       </div>
       
-      <div className="border-t border-zinc-200 dark:border-zinc-800 p-4">
-        <div className="flex items-center gap-3 px-3 py-2 mb-2">
-          <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-sm">
+      <div className="p-4" style={{ paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)' }}>
+        <div className="flex items-center gap-3 px-3 py-2 mb-3">
+          <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm shadow-sm" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>
             {userProfile.initials}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-zinc-900 dark:text-white truncate">{userProfile.name}</p>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">{userProfile.specialty}</p>
+            <p className="text-sm font-semibold truncate" style={{ color: 'var(--text-primary)' }}>{userProfile.name}</p>
+            <p className="text-xs truncate" style={{ color: 'var(--text-muted)' }}>{userProfile.specialty}</p>
           </div>
         </div>
         <button
           onClick={handleSignOut}
-          className="group flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-all w-full text-left"
+          className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all w-full text-left"
+          style={{ color: 'var(--text-secondary)' }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'; e.currentTarget.style.color = '#ef4444'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
         >
-          <LogOut className="w-5 h-5 flex-shrink-0 text-zinc-400 group-hover:text-red-600 dark:group-hover:text-red-400" />
+          <LogOut className="w-4 h-4 flex-shrink-0" />
           Sign out
         </button>
       </div>
