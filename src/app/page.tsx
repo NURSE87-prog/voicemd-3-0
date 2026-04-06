@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { Mic, Square, Copy, Check, Plus, AlertCircle } from "lucide-react";
+import { Mic, Square, Copy, Check, Plus, AlertCircle, Sparkles, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 type NoteData = {
   chiefComplaint: string;
@@ -112,7 +113,7 @@ export default function VoiceMD() {
       console.log("Note generated:", noteData.note);
       setNote(noteData.note);
       setStatus("idle");
-      showToast("Note generated successfully!");
+      showToast("Note generation completed securely");
     } catch (error) {
       console.error("Processing error:", error);
       showToast(error instanceof Error ? error.message : "Processing error. Please try again.", "error");
@@ -127,7 +128,7 @@ export default function VoiceMD() {
       .writeText(text)
       .then(() => {
         setCopied(true);
-        showToast("Copied to clipboard");
+        showToast("Copied to clipboard securely");
         setTimeout(() => setCopied(false), 2000);
       })
       .catch(() => showToast("Failed to copy", "error"));
@@ -141,28 +142,37 @@ export default function VoiceMD() {
 
   return (
     <>
-      <header className="header">
-        <div className="logo-container">
-          <div className="logo">VoiceMD</div>
-          <div className="badge animate-pulse">FREE FOR 2 MONTHS</div>
+      <header className="header flex flex-col md:flex-row items-center justify-between gap-4 p-4 md:p-6 w-full max-w-6xl mx-auto">
+        <div className="logo-container flex items-center gap-3">
+          <div className="logo text-2xl font-black tracking-tight flex items-center gap-1">
+            VoiceMD<Sparkles className="w-4 h-4 text-amber-500" />
+          </div>
+          <div className="badge animate-pulse bg-gradient-to-r from-amber-500/10 to-amber-500/30 text-amber-700 border border-amber-500/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest hidden sm:block">Diamond Access: 2 Months Free</div>
         </div>
-        <div className="lang-selector">
-          <button className={`lang-btn ${lang === "EN" ? "active" : ""}`} onClick={() => setLang("EN")}>
-            EN
-          </button>
-          <button className={`lang-btn ${lang === "FR" ? "active" : ""}`} onClick={() => setLang("FR")}>
-            FR
-          </button>
+        <div className="flex items-center gap-4">
+          <div className="lang-selector bg-[#e5e5e5] dark:bg-[#222] p-1 rounded-full flex gap-1">
+            <button className={`lang-btn px-4 py-1.5 rounded-full text-xs ${lang === "EN" ? "bg-white dark:bg-black font-bold shadow-sm" : ""}`} onClick={() => setLang("EN")}>
+              EN
+            </button>
+            <button className={`lang-btn px-4 py-1.5 rounded-full text-xs ${lang === "FR" ? "bg-white dark:bg-black font-bold shadow-sm" : ""}`} onClick={() => setLang("FR")}>
+              FR
+            </button>
+          </div>
+          <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700 hidden sm:block"></div>
+          <Link href="/signup" className="flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-full font-semibold text-sm hover:scale-105 transition-transform shadow-lg">
+            Create Account <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </header>
 
-      <main className="main">
-        <div className="hero-section">
-          <div className="promo-tag">Limited Time Launch Offer</div>
-          <h1 className="hero-title">Medical Dictation <span className="text-highlight">Simplified</span></h1>
-          <p className="hero-subtitle">
-            Get <strong>2 MONTHS COMPLIMENTARY</strong> access. 
-            Record your consultation and get structured clinical notes instantly.
+      <main className="main max-w-4xl mx-auto">
+        <div className="hero-section mb-12 text-center flex flex-col items-center">
+          <div className="promo-tag bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 inline-flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Enterprise-Grade AI Protocol Active
+          </div>
+          <h1 className="hero-title text-5xl md:text-6xl font-black tracking-tighter mb-4 text-[#111] dark:text-[#eee]">Clinical Documentation, <span className="text-highlight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-serif italic">Elevated.</span></h1>
+          <p className="hero-subtitle text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mt-2 leading-relaxed">
+            Experience ambient intelligence. Transform your patient consultations into perfectly structured clinical narratives in an instant. <br className="hidden md:block"/>Enjoy <strong>2 MONTHS OF UNLIMITED CONCIERGE ACCESS</strong>.
           </p>
         </div>
 
