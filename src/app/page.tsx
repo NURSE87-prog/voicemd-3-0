@@ -142,37 +142,34 @@ export default function VoiceMD() {
 
   return (
     <>
-      <header className="header flex flex-col md:flex-row items-center justify-between gap-4 p-4 md:p-6 w-full max-w-6xl mx-auto">
-        <div className="logo-container flex items-center gap-3">
-          <div className="logo text-2xl font-black tracking-tight flex items-center gap-1">
-            VoiceMD<Sparkles className="w-4 h-4 text-amber-500" />
+      <header className="flex flex-col md:flex-row items-center justify-between p-6 max-w-6xl mx-auto w-full">
+        <div className="flex items-center gap-2">
+          <div className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+            VoiceMD
           </div>
-          <div className="badge animate-pulse bg-gradient-to-r from-amber-500/10 to-amber-500/30 text-amber-700 border border-amber-500/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest hidden sm:block">Diamond Access: 2 Months Free</div>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="lang-selector bg-[#e5e5e5] dark:bg-[#222] p-1 rounded-full flex gap-1">
-            <button className={`lang-btn px-4 py-1.5 rounded-full text-xs ${lang === "EN" ? "bg-white dark:bg-black font-bold shadow-sm" : ""}`} onClick={() => setLang("EN")}>
+        <div className="flex items-center gap-4 mt-4 md:mt-0">
+          <div className="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-full">
+            <button className={`px-4 py-1.5 rounded-full text-xs transition-all ${lang === "EN" ? "bg-white dark:bg-black font-semibold text-gray-900 dark:text-white shadow-sm" : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"}`} onClick={() => setLang("EN")}>
               EN
             </button>
-            <button className={`lang-btn px-4 py-1.5 rounded-full text-xs ${lang === "FR" ? "bg-white dark:bg-black font-bold shadow-sm" : ""}`} onClick={() => setLang("FR")}>
+            <button className={`px-4 py-1.5 rounded-full text-xs transition-all ${lang === "FR" ? "bg-white dark:bg-black font-semibold text-gray-900 dark:text-white shadow-sm" : "text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"}`} onClick={() => setLang("FR")}>
               FR
             </button>
           </div>
-          <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700 hidden sm:block"></div>
-          <Link href="/signup" className="flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-full font-semibold text-sm hover:scale-105 transition-transform shadow-lg">
-            Create Account <ArrowRight className="w-4 h-4" />
+          <Link href="/signup" className="text-sm font-medium text-white bg-gray-900 dark:bg-white dark:text-black px-5 py-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">
+            Try Free
           </Link>
         </div>
       </header>
 
-      <main className="main max-w-4xl mx-auto">
-        <div className="hero-section mb-12 text-center flex flex-col items-center">
-          <div className="promo-tag bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 inline-flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Enterprise-Grade AI Protocol Active
-          </div>
-          <h1 className="hero-title text-5xl md:text-6xl font-black tracking-tighter mb-4 text-[#111] dark:text-[#eee]">Clinical Documentation, <span className="text-highlight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-serif italic">Elevated.</span></h1>
-          <p className="hero-subtitle text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mt-2 leading-relaxed">
-            Experience ambient intelligence. Transform your patient consultations into perfectly structured clinical narratives in an instant. <br className="hidden md:block"/>Enjoy <strong>2 MONTHS OF UNLIMITED CONCIERGE ACCESS</strong>.
+      <main className="max-w-3xl mx-auto px-6 py-16 md:py-24 text-center">
+        <div className="mb-12">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white mb-6">
+            Effortless clinical documentation.
+          </h1>
+          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
+            Designed for healthcare professionals. Record your consultation and instantly generate perfectly structured clinical notes with zero typing.
           </p>
         </div>
 

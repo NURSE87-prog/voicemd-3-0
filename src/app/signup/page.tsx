@@ -59,20 +59,17 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="flex-1 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 bg-zinc-50 dark:bg-black relative overflow-hidden py-24 min-h-[calc(100vh-4rem)]">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[100px] pointer-events-none" />
-
-      <div className="w-full max-w-md animate-fade-in relative z-10 glass dark:glass-dark rounded-3xl p-8 shadow-xl shadow-zinc-900/5 dark:shadow-black/40">
-        <div className="flex flex-col items-center mb-8">
-          <div className="bg-blue-600 p-3 rounded-xl text-white mb-4 shadow-lg shadow-blue-500/30">
-            <Stethoscope className="w-8 h-8" />
+    <main className="flex-1 flex flex-col justify-center items-center p-4 sm:p-8 bg-[#fcfcfc] dark:bg-[#0a0a0a] min-h-screen">
+      <div className="w-full max-w-lg mx-auto bg-white dark:bg-[#111] border border-gray-100 dark:border-neutral-800 rounded-3xl p-8 sm:p-10 shadow-2xl shadow-gray-200/50 dark:shadow-black/50">
+        <div className="flex flex-col items-center mb-8 text-center">
+          <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-full text-gray-900 dark:text-gray-100 mb-5">
+            <Stethoscope className="w-6 h-6" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
-            Create an account
+          <h1 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white mb-2">
+            Create your account
           </h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2 text-center">
-            Enter your details below to start using MediNote AI for free.
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Join MediNote AI and transform your clinical workflow.
           </p>
         </div>
 
