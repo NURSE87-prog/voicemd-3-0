@@ -142,7 +142,10 @@ export default function VoiceMD() {
   return (
     <>
       <header className="header">
-        <div className="logo">VoiceMD</div>
+        <div className="logo-container">
+          <div className="logo">VoiceMD</div>
+          <div className="badge animate-pulse">FREE FOR 2 MONTHS</div>
+        </div>
         <div className="lang-selector">
           <button className={`lang-btn ${lang === "EN" ? "active" : ""}`} onClick={() => setLang("EN")}>
             EN
@@ -155,8 +158,12 @@ export default function VoiceMD() {
 
       <main className="main">
         <div className="hero-section">
-          <h1 className="hero-title">Medical Dictation</h1>
-          <p className="hero-subtitle">Record your consultation and get structured notes instantly</p>
+          <div className="promo-tag">Limited Time Launch Offer</div>
+          <h1 className="hero-title">Medical Dictation <span className="text-highlight">Simplified</span></h1>
+          <p className="hero-subtitle">
+            Get <strong>2 MONTHS COMPLIMENTARY</strong> access. 
+            Record your consultation and get structured clinical notes instantly.
+          </p>
         </div>
 
         <div className="record-container">
