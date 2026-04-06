@@ -18,8 +18,7 @@ import { useState, useEffect } from "react";
 
 const navigation = [
   { name: 'Overview', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'Patients', href: '/dashboard/patients', icon: Users },
-  { name: 'All Notes', href: '/dashboard/notes', icon: FileText },
+  { name: 'Platform Notes', href: '/dashboard/notes', icon: FileText },
   { name: 'Settings', href: '/dashboard/settings', icon: Settings },
 ];
 
